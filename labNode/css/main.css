@@ -1,0 +1,27 @@
+body { background-color: #303040; margin: 0px; overflow: hidden; color: #ffffff; font-family: sans-serif; font-size: 13px; /*cursor: none;*/ }
+@font-face { font-family: OpenSans-SemiboldItalic; src: url('../fonts/OpenSans-SemiboldItalic.ttf'); }
+
+
+#info { 
+	color: #ffffff;
+	position: absolute; 
+	-webkit-user-select: none;	
+	-webkit-user-drag: none;
+	top: -200px;	
+	left: 0px;
+	width: 160px;
+	height: 200px;
+	font-size: 22px;
+	padding: 20px;
+}
+
+#stats #fps { background: transparent !important }
+#stats #fps #fpsText { color: #777 !important }
+#stats #fps #fpsGraph { display: none }
+
+.songLink{
+	position: absolute;
+	left: 10px;
+	bottom: 65px;
+	text-decoration: none;
+}
