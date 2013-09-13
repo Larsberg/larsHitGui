@@ -8,6 +8,7 @@ $(window).bind("load", function() {
 	app = new APP( 'container', useStats, debug );
 });
 
+
 function APP( _containerName, _useStats, _debug) {
 
 	var container = document.getElementById( _containerName );
@@ -205,7 +206,37 @@ function APP( _containerName, _useStats, _debug) {
 			}
 		}
 
-		console.log( output );
+		// console.log( JSON.stringify(output) );
+
+		const MIME_TYPE = 'application/json';
+		// const MIME_TYPE = 'text/plain';
+
+		window.URL = window.webkitURL || window.URL;
+
+		var bb = new Blob([JSON.stringify(output)], {type: MIME_TYPE});
+		var a = document.createElement('a');
+		a.style.position = 'absolute';
+		a.style.left = "750px";
+		a.style.top = "10px";
+		a.style.color = "white";
+
+		a.download = "preset.json";// container.querySelector('input[type="text"]').value;
+		a.href = window.URL.createObjectURL(bb);
+		a.textContent = 'Download ready';
+
+		a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
+		a.draggable = true; // Don't really need, but good practice.
+		a.classList.add('dragout');
+
+		container.appendChild(a);
+
+		a.onclick = function(e) {
+			if ('disabled' in this.dataset) {
+				return false;
+			}
+
+			// cleanUp(this);
+		};
 	}
 
 	/**
@@ -307,9 +338,6 @@ function APP( _containerName, _useStats, _debug) {
 		camera.updateProjectionMatrix();
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		container.style.width = window.innerWidth + "px";
-		container.style.height = window.innerHeight + "px";
 	}
 
 	function onMouseMove( event , still ) {
@@ -367,10 +395,9 @@ function APP( _containerName, _useStats, _debug) {
 		}
 	}
 
-	function rendererSetup(){
+	function rendererSetup()
+	{
 		container.style.position = 'absolute';
-		container.style.width = window.innerWidth + "px";
-		container.style.height = window.innerHeight + "px";
 		container.style.left = '0px';
 		container.style.top = '0px';
 
