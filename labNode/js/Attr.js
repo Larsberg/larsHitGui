@@ -166,6 +166,8 @@ LabNodes.Attr.Base.prototype.connectInput = function( input, inputName, attrType
 					//add a refence to the input's curves
 					input.curves[ this.curve.name ] = this.curve;	
 				}
+
+				LabNodes.autoupdate();
 			}
 		}
 	}

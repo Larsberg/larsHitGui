@@ -195,7 +195,6 @@ function APP( _containerName, _useStats, _debug) {
 					left: $(attr.div).position().left,
 					top: $(attr.div).position().top,
 				}
-				console.log( inputAttr );
 			}
 
 			output[n.name] = {

@@ -252,7 +252,10 @@ LabNodes.AudioNodes.Gain = function(params){
 		}
 	}.bind( this );
 
-	LabNodes.addToAutoupdate( this.out );
+	LabNodes.addToAutoupdate( this.out, function(){ 
+		// console.log( "damn it", $(this.slider).slider("value") );
+		adjustGain( $(this.slider).slider("value") );
+	}.bind( this ) );
 }
 LabNodes.AudioNodes.Gain.prototype = Object.create( LabNodes.Nodes.Base.prototype );
 

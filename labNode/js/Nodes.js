@@ -475,9 +475,6 @@ LabNodes.Nodes.Slider = function( params ){
 		var val = THREE.Math.mapLinear( lerpVal, 0, 1, parseFloat(this.minInput.value.value), parseFloat(this.maxInput.value.value) );
 		this.out.value = val;
 		this.outvalText.nodeValue = parseFloat(val).toFixed(3);
-
-		//update any text fields
-		LabNodes.autoupdate();
 	}.bind( this );
 
 	var sliderPos = params.sliderPosition || sliderPos || .5;
@@ -491,13 +488,16 @@ LabNodes.Nodes.Slider = function( params ){
 		value: sliderPos,
 		slide: function(event, ui){
 			updateOuput(ui.value);
+			LabNodes.autoupdate();
 		},
 		change: function(event, ui){
 			updateOuput(ui.value);
+			LabNodes.autoupdate();
 		},
 
 		create: function(event, ui){
 			updateOuput( sliderPos );
+			LabNodes.autoupdate();
 		}
 	});
 
@@ -514,7 +514,10 @@ LabNodes.Nodes.Slider = function( params ){
 	var a = $(this.slider).children()[1];
 	a.appendChild( outText );
 
-	LabNodes.addToAutoupdate( this.out );
+	LabNodes.addToAutoupdate( this.out, function(){
+		updateOuput( $( this.slider ).slider("value") );
+	}.bind( this ) );
+
 	this.out.onUpdate = this.update;
 }
 
