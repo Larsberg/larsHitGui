@@ -206,9 +206,10 @@ function APP( _containerName, _useStats, _debug) {
 			}
 		}
 
+		const MIME_TYPE = 'application/json';
 		window.URL = window.webkitURL || window.URL;
 
-		var blob = new Blob([JSON.stringify(output)], {type: 'application/json'});
+		var blob = new Blob([JSON.stringify(output)], {type: MIME_TYPE});
 
 		var a = document.createElement('a');
 		a.style.position = 'absolute';
@@ -222,8 +223,8 @@ function APP( _containerName, _useStats, _debug) {
 
 		a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
 		a.draggable = true; // Don't really need, but good practice.
-		a.classList.add('dragout');
-		container.appendChild(a);
+		a.classList.add( 'dragout' );
+		container.appendChild( a );
 	}
 
 	/**
