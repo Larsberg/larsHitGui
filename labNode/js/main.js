@@ -206,37 +206,24 @@ function APP( _containerName, _useStats, _debug) {
 			}
 		}
 
-		// console.log( JSON.stringify(output) );
-
-		const MIME_TYPE = 'application/json';
-		// const MIME_TYPE = 'text/plain';
-
 		window.URL = window.webkitURL || window.URL;
 
-		var bb = new Blob([JSON.stringify(output)], {type: MIME_TYPE});
+		var blob = new Blob([JSON.stringify(output)], {type: 'application/json'});
+
 		var a = document.createElement('a');
 		a.style.position = 'absolute';
 		a.style.left = "750px";
 		a.style.top = "10px";
 		a.style.color = "white";
 
-		a.download = "preset.json";// container.querySelector('input[type="text"]').value;
-		a.href = window.URL.createObjectURL(bb);
-		a.textContent = 'Download ready';
+		a.download = "preset.json";
+		a.href = window.URL.createObjectURL( blob );
+		a.textContent = 'download preset';
 
 		a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
 		a.draggable = true; // Don't really need, but good practice.
 		a.classList.add('dragout');
-
 		container.appendChild(a);
-
-		a.onclick = function(e) {
-			if ('disabled' in this.dataset) {
-				return false;
-			}
-
-			// cleanUp(this);
-		};
 	}
 
 	/**
